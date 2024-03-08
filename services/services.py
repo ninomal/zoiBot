@@ -7,12 +7,11 @@ ONDAS_BOLINGER = 20
 STANDER_DEVIATIONS = 2
 TL_SD = 2
 SL_SD = 2
-BUY_SELL_STOP = 50
 DEVIATION = 0
 
-
-class ProductsServices():
-    def __init__(self, mt5, timeFramesStr, ASSET):
+class Services():
+    def __init__(self, mt5, timeFramesStr, ASSET, BUY_SELL_STOP):
+        self.BUY_SELL_STOP = BUY_SELL_STOP
         self.ASSET = ASSET
         self.mt5 = mt5
         self.timeFramesStr = timeFramesStr
@@ -40,8 +39,8 @@ class ProductsServices():
             "type": self.mt5.ORDER_TYPE_BUY,
             "price": preco,
             "deviation":DEVIATION,
-            "sl": preco - BUY_SELL_STOP * pontos,
-            "tp":preco + BUY_SELL_STOP * pontos,
+            "sl": preco - self.BUY_SELL_STOP * pontos,
+            "tp":preco + self.BUY_SELL_STOP * pontos,
             "magic": MAGIC,
             "comment": "python script buy",
             "type_time": self.mt5.ORDER_TIME_GTC,
@@ -62,8 +61,8 @@ class ProductsServices():
             "type": self.mt5.ORDER_TYPE_SELL,
             "price": preco,
             "deviation": DEVIATION,
-            "sl": preco + BUY_SELL_STOP * pontos,
-            "tp":preco - BUY_SELL_STOP * pontos,
+            "sl": preco + self.BUY_SELL_STOP * pontos,
+            "tp":preco - self.BUY_SELL_STOP * pontos,
             "magic": MAGIC,
             "comment": "python script sell",
             "type_time": self.mt5.ORDER_TIME_GTC,

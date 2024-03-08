@@ -14,14 +14,17 @@ MEDIA = 20 # Number o average media
 
 def main():   
     mt5.initialize() 
-    service = services.ProductsServices(mt5, SELECTTIME, ASSET)
+    service = services.Services(mt5, SELECTTIME, ASSET, STOP)
     products = Products(mt5, SELECTTIME, ASSET, HOURSSTART)
-    productsServices = ProductsServices(mt5, SELECTTIME, ASSET, HOURSSTART)
+    productsServices = ProductsServices(mt5, SELECTTIME, ASSET, HOURSSTART, STOP)
     #productsServices.eom()
     print(productsServices.calcAMV(MEDIA))
     print(';D')
     print(productsServices.selectBar('close'))
-    
+    print(productsServices.lastbar())
+    lastbar = productsServices.selectBar('close')[999]
+    print(lastbar)
+   
 
 
 

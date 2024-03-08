@@ -4,11 +4,13 @@ import pandas as pd
 from functools import cache
 import time
 from datetime import datetime
+from services.services import Services
 
 class ProductsServices:  
-    def __init__(self, mt5, timeFrame, ASSET, HOURSSTART):
+    def __init__(self, mt5, timeFrame, ASSET, HOURSSTART, BUY_SELL_STOP):
         self.mt5 = mt5
         self.products = Products(self.mt5, timeFrame, ASSET, HOURSSTART)
+        self.services = Services(mt5, timeFrame, ASSET, BUY_SELL_STOP)
         self.pd = pd
         self.futureNegative = 0
         self.futurePositive = 0
@@ -109,7 +111,11 @@ class ProductsServices:
                 print(self.futureNegative)
                 self.negative = True        
                 
-    
-    def teste(self):
-        help(ta.midprice)
-   
+    def calcAMVbroke(self, valueAMV, valueClose):
+        valueAMV = self.products.lastIndex(valueAMV)
+        valueClose = self.selectBar(valueClose)[999]
+        if (valueClose - valueAMV) > 100:
+            self.services.sell()
+        elif (valueAMV - valueClose) < 100:
+            self.services.buy
+            

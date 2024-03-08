@@ -137,6 +137,5 @@ class Products:
     def deleteImg(self, path):
         os.remove(path)
         
-   
-        
+    
         
