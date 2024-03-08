@@ -24,8 +24,8 @@ class ProductsServices:
         return bar
     
     #mid price   
-    def calcAMV(self):
-        media = ta.midprice(self.selectBar('open'), self.selectBar('close'), 20, 0 , 0 )
+    def calcAMV(self, media):
+        media = ta.midprice(self.selectBar('open'),self.selectBar('close'), media, 0 , 0)
         return media
         
     #Exponential Moving Average    
@@ -83,7 +83,7 @@ class ProductsServices:
         for i in range(1000):
             calc = self.convertToList(self.lastbar()) 
             self.calcV(calc)
-            self.timeSleepNow()
+            self.products.timeSleepNow()
         
     #Beta  calcV method
     @cache
@@ -110,5 +110,6 @@ class ProductsServices:
                 self.negative = True        
                 
     
-                           
+    def teste(self):
+        help(ta.midprice)
    

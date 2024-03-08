@@ -132,17 +132,11 @@ class Products:
         newTime += ".png"
         self.listOfImage.append(newTime)
         return newTime
-    
-    #list all imagen of hoursimage
-    def listAllimage(self):
-        image = self.listOfImage[self.imageCount]
-        self.imageCount += 1
-        return image
-       
+     
     #for delete img afeter sending
     def deleteImg(self, path):
         os.remove(path)
         
-    
+   
         
         
