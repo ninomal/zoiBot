@@ -19,12 +19,20 @@ def main():
     productsServices = ProductsServices(mt5, SELECTTIME, ASSET, HOURSSTART, STOP)
     #productsServices.eom()
     print(productsServices.calcAMV(MEDIA))
-    print(';D')
+    print()
     print(productsServices.selectBar('close'))
-    print(productsServices.lastbar())
-    lastbar = productsServices.selectBar('close')[999]
-    print(lastbar)
-   
+    #print(productsServices.lastbar())
+    print('\n\n\n')
+    lastClosebar = productsServices.selectBar('close')[999]
+    amv= productsServices.calcAMV(MEDIA)[999]
+    
+    exit = True
+    print(lastClosebar)
+    print(amv)
+    
+    while exit:
+        exit = productsServices.calcAMVbroke(MEDIA, 'close')
+        print("1")
 
 
 

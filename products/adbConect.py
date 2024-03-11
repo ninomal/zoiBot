@@ -1,5 +1,6 @@
 from products.Adb import Adbconect
 from products.products import Products
+from enums.enumsGrafics import EnumsGraph
 
 import time
 
@@ -7,6 +8,7 @@ class Apiconect():
     def __init__(self, mt5, timeframe, asset, phonenumber, ui, HOURSSTART) :
         self.product = Products(mt5, timeframe, asset, HOURSSTART)
         self.adb = Adbconect(phonenumber)
+        self.enumsGrafics = EnumsGraph(ui)
         self.ui = ui
               
     def readTxt(self):
@@ -23,7 +25,7 @@ class Apiconect():
         self.adb.adbConect()
         
     def closedPltEnums(self):
-        self.enumsGraph.pltClosed()
+        self.enumsGrafics.pltClosed()
         
 
     

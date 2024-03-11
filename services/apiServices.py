@@ -44,20 +44,19 @@ class ApiServices():
                 print("Action error")
             
     def callScreenShoot(self):
-        apiConect = Apiconect(self.mt5, self.selecTime, self.ASSET, self.phone, self.ui, self.HOURSSTART)
-        th1  = threading.Thread(target=apiConect.selecGraph)
+        #apiConect = Apiconect(self.mt5, self.selecTime, self.ASSET, self.phone, self.ui, self.HOURSSTART)
+        #th1  = threading.Thread(target=apiConect.selecGraph)
         screenShot = Screenshot(self.product.hoursImgName())
         th2 = threading.Thread(target=screenShot.printScreen)
         time.sleep(1.0)
-        th1.start()
+        #th1.start()
         th2.start()
         time.sleep(15.0)
         th4 = threading.Thread(target=self.apiConect.sendImage)
         th4.start() 
          
     def calcvScreen(self):
-        #if self.productService.calcV():
-        if self.productService.teste():
+        if self.productService.calcV():
             th3 = threading.Thread(target= self.apiConect.apiConectZap)
             th1  = threading.Thread(target=self.ui.mt5Graf)
             screenShot = Screenshot(self.product.hoursImgName())
@@ -72,7 +71,7 @@ class ApiServices():
             th4.start()        
                       
     def graficsSelectApiUi(self): 
-        th3 = threading.Thread(target= self.apiConect.apiConectZap)
+        #th3 = threading.Thread(target= self.apiConect.apiConectZap)
         th1  = threading.Thread(target=self.apiConect.selecGraph, daemon=True)
         screenShot = Screenshot(self.product.hoursImgName())
         th2 = threading.Thread(target=screenShot.printScreen)
@@ -80,7 +79,7 @@ class ApiServices():
         th1.start()
         th2.start()
         time.sleep(10)
-        th3.start()
+        #th3.start()
         time.sleep(30.0)     
         th4 = threading.Thread(target=self.apiConect.sendImage)
         th4.start()        
