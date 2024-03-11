@@ -114,11 +114,17 @@ class ProductsServices:
     def calcAMVbroke(self, valueAMVnotSlice, valueClose):
         valueClose = self.selectBar(valueClose)[999]
         valueAMV= self.calcAMV(valueAMVnotSlice)[999]
-        if (valueClose - valueAMV) > 100:
+        if (valueClose - valueAMV) < -100:
+            print("Sell")
             self.services.sell()
             return False
-        elif (valueAMV - valueClose) < 100:
-            self.services.buy
+        elif (valueAMV - valueClose) > 100:
+            print('Buy')
+            self.services.buy()
             return False
-        self.products.timeSleepNow()
+        else:
+            self.products.timeSleepNow()
+            return True
+            
+        
             
