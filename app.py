@@ -11,6 +11,7 @@ PHONENUMBER = "You watssap number"
 HOURSSTART = '' # IF you wish market start hours exemple '9:00:00'
 STOP = 100 #define ou stoploss
 MEDIA = 20 # Number o average media
+GAINPOINTS = 50 # number of gain points
 
 def main():   
     mt5.initialize() 
@@ -30,10 +31,9 @@ def main():
     print('Closed bar = ', amv)
     print()
     
-    a = 0
     exit = True
     while exit:
-        exit = productsServices.calcAMVbroke(MEDIA, 'close')
+        exit = productsServices.calcAMVbroke(MEDIA, 'close', GAINPOINTS)
         
 
 

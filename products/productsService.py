@@ -111,16 +111,18 @@ class ProductsServices:
                 print(self.futureNegative)
                 self.negative = True        
                 
-    def calcAMVbroke(self, valueAMVnotSlice, valueClose):
+    def calcAMVbroke(self, valueAMVnotSlice, valueClose, gainpoints):
         valueClose = self.selectBar(valueClose)[999]
         valueAMV= self.calcAMV(valueAMVnotSlice)[999]
         if (valueClose - valueAMV) < -100:
             print("Sell")
             self.services.sell()
+            self.services.comeBackSell(gainpoints)
             return False
         elif (valueAMV - valueClose) > 100:
             print('Buy')
             self.services.buy()
+            self.services.comeBackBuy(gainpoints)
             return False
         else:
             self.products.timeSleepNow()

@@ -54,6 +54,7 @@ class Services():
     def sell(self):
         preco = self.mt5.symbol_info_tick(self.ASSET).bid
         pontos = self.mt5.symbol_info(self.ASSET).point
+        print(preco)
         request = ({
             "action": self.mt5.TRADE_ACTION_DEAL,
             "symbol": self.ASSET,
@@ -72,6 +73,53 @@ class Services():
         result = self.mt5.order_send(request)
         self.sellOrders += -1
         self.mt5.orders_total()
+        print(result)
+  
+    def comeBackBuy(self, value):
+        preco = (self.mt5.symbol_info_tick(self.ASSET).bid) -value
+        pontos = self.mt5.symbol_info(self.ASSET).point
+        print(preco)
+        request = ({
+            "action": self.mt5.TRADE_ACTION_DEAL,
+            "symbol": self.ASSET,
+            "volume": VOLUME,
+            "type": self.mt5.ORDER_TYPE_SELL,
+            "price": preco,
+            "deviation": DEVIATION,
+            "sl": preco + self.BUY_SELL_STOP * pontos,
+            "tp":preco - self.BUY_SELL_STOP * pontos,
+            "magic": MAGIC,
+            "comment": "python script sell",
+            "type_time": self.mt5.ORDER_TIME_GTC,
+            "type_filling": self.mt5.ORDER_FILLING_RETURN
+        })
+        self.mt5.order_send(request)
+        result = self.mt5.order_send(request)
+        self.sellOrders += -1
+        self.mt5.orders_total()
+        print(result)
+  
+    def comeBackSell(self, value):
+        preco = (self.mt5.symbol_info_tick(self.ASSET).ask) - value
+        pontos = self.mt5.symbol_info(self.ASSET).point
+        print(preco)
+        request = ({
+            "action": self.mt5.TRADE_ACTION_DEAL,
+            "symbol": self.ASSET,
+            "volume": VOLUME,
+            "type": self.mt5.ORDER_TYPE_BUY,
+            "price": preco,
+            "deviation":DEVIATION,
+            "sl": preco - self.BUY_SELL_STOP * pontos,
+            "tp":preco + self.BUY_SELL_STOP * pontos,
+            "magic": MAGIC,
+            "comment": "python script buy",
+            "type_time": self.mt5.ORDER_TIME_GTC,
+            "type_filling": self.mt5.ORDER_FILLING_RETURN
+        })
+        self.mt5.order_send(request)
+        result = self.mt5.order_send(request)
+        self.buyOrders += 1
         print(result)
   
     def lastick(self):
