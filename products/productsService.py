@@ -6,6 +6,7 @@ import time
 from datetime import datetime
 from services.services import Services
 
+
 class ProductsServices:  
     def __init__(self, mt5, timeFrame, ASSET, HOURSSTART, BUY_SELL_STOP):
         self.mt5 = mt5
@@ -80,6 +81,15 @@ class ProductsServices:
                        , self.selectBar('close'),  self.selectBar('real_volume') )
         return eomData
     
+    
+    def sma(self):
+        smaData = ta.sma(self.priceVol())
+        return smaData
+    
+    def volumeEma(self):
+        mov = ta.ema(self.priceVol())
+        return mov
+    
     # calcv call method
     def calcVfunc(self):
         for i in range(1000):
@@ -128,5 +138,59 @@ class ProductsServices:
             self.products.timeSleepNow()
             return True
             
+    def volumeCheckSimple(self, valueAMVnotSlice, valueClose, gainpoints, volume):
+        valueAMV= self.calcAMV(valueAMVnotSlice)[999]
+        if (valueClose - valueAMV) < -100 and volumeBefore > volume:
+            print("Sell")
+            self.services.sell()
+            self.services.comeBackSell(gainpoints)
+            return False
+        elif (valueAMV - valueClose) > 100 and volumeBefore < volume:
+            print('Buy')
+            self.services.buy()
+            self.services.comeBackBuy(gainpoints)
+            return False
+        else:
+            volumeBefore = volume
+            self.products.timeSleepNow()
+            return True
+    
+    #Beta
+    def volumeCheckComplex(self, valueAMVnotSlice, valueClose, gainpoints, volume):
+        valueAMV= self.calcAMV(valueAMVnotSlice)[999]
+        if (valueClose - valueAMV) < -100 :
+            volumeAfeter = 0
+            for i in range(-4):
+                volumeBefore += volume[i]
+            volumeBefore = volumeBefore/5
+            for i in range(4):
+                volumeAfeter+= volume
+                self.products.timeSleepNow()
+            volumeAfeter= volumeAfeter/5
+            if volumeBefore > volumeAfeter:
+                print("Sell")
+                self.services.sell()
+                self.services.comeBackSell(gainpoints)
+                return False
+        elif (valueAMV - valueClose) > 100 :
+            volumeAfeter = 0
+            for i in range(-4):
+                volumeBefore += volume[i]
+            volumeBefore = volumeBefore/5
+            for i in range(4):
+                volumeAfeter+= volume
+                self.products.timeSleepNow()
+            volumeAfeter= volumeAfeter/5
+            if volumeBefore < volumeAfeter:
+                print('Buy')
+                self.services.buy()
+                self.services.comeBackBuy(gainpoints)
+                return False
+        else:
+            volumeBefore = volume
+            self.products.timeSleepNow()
+            return True
         
+    def teste(self):
+        print(help(ta.ema))
             

@@ -1,11 +1,11 @@
-## metatrader5 Api
+## metatrader5 Api and zoibot
 
 [![NPM](https://img.shields.io/badge/Lincence-MIT-red)](https://github.com/ninomal/metatrader5/blob/main/LICENSE1)
 [![NPM](https://img.shields.io/badge/Lincence-MQL-green)](https://www.mql5.com/en/docs)
 
 # This project
 
-This project is based on dynamic graphics for mql5;Tools for buy and sell and average media in pandas_ta
+This project is based on dynamic graphics for mql5;Tools for buy and sell and average media in pandas_ta, add gain broke average media
 
 # Functions
 

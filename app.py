@@ -31,9 +31,16 @@ def main():
     print('Closed bar = ', amv)
     print()
     
-    exit = True
-    while exit:
-        exit = productsServices.calcAMVbroke(MEDIA, 'close', GAINPOINTS)
+    print("teste")
+    #print(productsServices.sma())
+    #print(help(productsServices.teste()))
+    
+    
+    
+    
+    #exit = True
+    #while exit:
+        #exit = productsServices.calcAMVbroke(MEDIA, 'close', GAINPOINTS)
         
 
 
