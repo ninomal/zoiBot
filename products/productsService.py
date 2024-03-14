@@ -53,8 +53,8 @@ class ProductsServices:
     @cache
     def priceVol(self):
         pricevol = ta.pvol(self.selectBar('close'), self.selectBar('real_volume')) 
-        pricevolConv = pd.DataFrame(pricevol)
-        return pricevolConv
+        #pricevolConv = pd.DataFrame(pricevol)
+        return pricevol
     
     #last bar in market
     def lastbar(self):
@@ -139,7 +139,9 @@ class ProductsServices:
             return True
             
     def volumeCheckSimple(self, valueAMVnotSlice, valueClose, gainpoints, volume):
+        valueClose = self.selectBar(valueClose)[999]
         valueAMV= self.calcAMV(valueAMVnotSlice)[999]
+        volumeBefore = volume[999]
         if (valueClose - valueAMV) < -100 and volumeBefore > volume:
             print("Sell")
             self.services.sell()
@@ -157,7 +159,9 @@ class ProductsServices:
     
     #Beta
     def volumeCheckComplex(self, valueAMVnotSlice, valueClose, gainpoints, volume):
+        valueClose = self.selectBar(valueClose)[999]
         valueAMV= self.calcAMV(valueAMVnotSlice)[999]
+        volumeBefore = volume[999]
         if (valueClose - valueAMV) < -100 :
             volumeAfeter = 0
             for i in range(-4):

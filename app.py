@@ -30,8 +30,12 @@ def main():
     print('AMV = ', lastClosebar)
     print('Closed bar = ', amv)
     print()
+   
+    #productsServices.volumeCheckSimple(MEDIA,'close',
+                                #GAINPOINTS,productsServices.priceVol())
     
-    print("teste")
+    productsServices.volumeCheckComplex(MEDIA,'close',
+                                GAINPOINTS,productsServices.priceVol())
     #print(productsServices.sma())
     #print(help(productsServices.teste()))
     
