@@ -37,11 +37,8 @@ def main():
     productsServices.volumeCheckComplex(MEDIA,'close',
                                 GAINPOINTS,productsServices.priceVol())
     #print(productsServices.sma())
-    #print(help(productsServices.teste()))
     
-    
-    
-    
+  
     #exit = True
     #while exit:
         #exit = productsServices.calcAMVbroke(MEDIA, 'close', GAINPOINTS)

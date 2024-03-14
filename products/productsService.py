@@ -164,10 +164,10 @@ class ProductsServices:
         volumeBefore = volume[999]
         if (valueClose - valueAMV) < -100 :
             volumeAfeter = 0
-            for i in range(-4):
+            for i in range(-5):
                 volumeBefore += volume[i]
             volumeBefore = volumeBefore/5
-            for i in range(4):
+            for i in range(5):
                 volumeAfeter+= volume
                 self.products.timeSleepNow()
             volumeAfeter= volumeAfeter/5
@@ -178,10 +178,10 @@ class ProductsServices:
                 return False
         elif (valueAMV - valueClose) > 100 :
             volumeAfeter = 0
-            for i in range(-4):
+            for i in range(-5):
                 volumeBefore += volume[i]
             volumeBefore = volumeBefore/5
-            for i in range(4):
+            for i in range(5):
                 volumeAfeter+= volume
                 self.products.timeSleepNow()
             volumeAfeter= volumeAfeter/5
@@ -195,6 +195,5 @@ class ProductsServices:
             self.products.timeSleepNow()
             return True
         
-    def teste(self):
-        print(help(ta.ema))
+   
             

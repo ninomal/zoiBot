@@ -76,6 +76,13 @@ grafics Select
 ![apiSelectGraph](https://github.com/ninomal/metatrader5/assets/137447782/d968ebf7-aaef-4904-a6a7-b4b4eaecfe4e)
 chose grafics in msg  watssap send image for you number
 
+if volume is the opposite, enter buy or sell auto
+![volemusimple](https://github.com/ninomal/zoibot/assets/137447782/82dd3ce1-7b56-443b-9666-8d17a4ae8279)
+
+if volume is the opposite, enter buy or sell auto aferter 5 candles
+![volumeComplex](https://github.com/ninomal/zoibot/assets/137447782/e3dffefe-eaea-42b9-bbba-b82f9814300a)
+
+
 # Graphics
 
 Volume in indice 50 in graph
