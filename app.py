@@ -34,10 +34,11 @@ def main():
     #productsServices.volumeCheckSimple(MEDIA,'close',
                                 #GAINPOINTS,productsServices.priceVol())
     
-    productsServices.volumeCheckComplex(MEDIA,'close',
-                                GAINPOINTS,productsServices.priceVol())
+    #productsServices.volumeCheckComplex(MEDIA,'close',
+                                #GAINPOINTS,productsServices.priceVol())
+                                
     #print(productsServices.sma())
-    
+    productsServices.calcV(productsServices.selectBar('close'), 000.100)
   
     #exit = True
     #while exit:

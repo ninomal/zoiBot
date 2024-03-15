@@ -39,7 +39,8 @@ class ProductsServices:
     #fixing  
     def vwap(self):
         vol = ta.vwap(self.selectBar('high'), self.selectBar('low'), 
-              self.selectBar('close'), self.selectBar('real_volume'), anchor= 'W') 
+              self.selectBar('close'), self.selectBar('real_volume'),anchor= 'M' ) 
+        vol.reset_index(inplace = True)
         return vol
     
     #Accumulation/Distribution Index
@@ -98,11 +99,10 @@ class ProductsServices:
             self.products.timeSleepNow()
         
     #Beta  calcV method
-    @cache
-    def calcV(self, data):
+    def calcV(self, data, points):
         if self.futureNegative == 0:
-            self.futurePositive = data +  ((data * 0.69)/100)
-            self.futureNegative = (data - (data * 0.69)/100)
+            self.futurePositive = data +  ((data + points)/100)
+            self.futureNegative = (data - (data + points)/100)
         elif data < self.futurePositive and self.positive:
             self.futurePositive = 0
             self.positive = False
@@ -113,14 +113,15 @@ class ProductsServices:
             return True      
         elif data > self.futurePositive:
             if self.positive == False:
-                self.futurePositive = (data - (data * 0.48)/100)
+                self.futurePositive = (data - (data + points)/100)
                 self.positive = True
+                self.services.buy()
         elif data < self.futureNegative:
             if self.negative == False:
-                self.futureNegative = (data + (data* 0.48)/100)
+                self.futureNegative = (data + (data + points)/100)
                 print(self.futureNegative)
                 self.negative = True        
-                
+                self.services.sell()
     def calcAMVbroke(self, valueAMVnotSlice, valueClose, gainpoints):
         valueClose = self.selectBar(valueClose)[999]
         valueAMV= self.calcAMV(valueAMVnotSlice)[999]
@@ -195,5 +196,5 @@ class ProductsServices:
             self.products.timeSleepNow()
             return True
         
-   
+    
             
