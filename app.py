@@ -2,7 +2,7 @@ import MetaTrader5 as mt5
 from services import services
 from products.products import Products
 from products.productsService import ProductsServices
-
+from services.servicesMql import ServicesMql
 
 SELECTTIME = "1" #select time here, string type exp '2' or '3'
 ASSET = "WINJ24" #Change name of ASSETS HERE exemple :"WDOc1"
@@ -12,6 +12,7 @@ HOURSSTART = '' # IF you wish market start hours exemple '9:00:00'
 STOP = 100 #define ou stoploss
 MEDIA = 20 # Number o average media
 GAINPOINTS = 50 # number of gain points
+SIZESYMBOLS = 10 # size of the asset name output
 
 def main():   
     mt5.initialize() 
@@ -38,8 +39,9 @@ def main():
                                 #GAINPOINTS,productsServices.priceVol())
                                 
     #print(productsServices.sma())
-    productsServices.calcV(productsServices.selectBar('close'), 000.100)
-  
+    #productsServices.calcV(productsServices.selectBar('close'), 000.100)
+    servicesMql5 = ServicesMql()
+    servicesMql5.getSymbols(10)
     #exit = True
     #while exit:
         #exit = productsServices.calcAMVbroke(MEDIA, 'close', GAINPOINTS)
